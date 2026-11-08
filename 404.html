@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ZeeSchool Manager Pro</title>
+<script>
+  // A mistyped address on this site still opens ZeeSchool, keeping anything after "?" (Release M.13).
+  // The site is either at the root (zeeschool.github.io, your own domain) or in a folder (zeemoapp.github.io/zeeschool/):
+  // it is in a folder when that folder has the site's favicon.svg. Works for both without changes.
+  (function () {
+    var seg = location.pathname.split('/')[1] || '', q = location.search, go = function (root) { location.replace(root + q); };
+    if (!seg || !window.fetch) { go('/'); return; }
+    fetch('/' + seg + '/favicon.svg', { method: 'HEAD', cache: 'no-store' })
+      .then(function (r) { go(r.ok ? '/' + seg + '/' : '/'); })
+      .catch(function () { go('/'); });
+  })();
+</script>
+</head>
+<body><p><a href="/">Open ZeeSchool Manager Pro</a></p></body>
+</html>
